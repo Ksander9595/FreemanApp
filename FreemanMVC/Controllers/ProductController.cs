@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using FreemanMVC.Models;
+using FreemanMVC.Models.ViewModels;
 
 namespace FreemanMVC.Controllers
 {
@@ -12,6 +13,9 @@ namespace FreemanMVC.Controllers
             repository = repo;
         }
 
-        public IActionResult List(int productPage = 1) => View(repository.Products.OrderBy(p=>p.ProductId).Skip((productPage-1)*PageSize).Take(PageSize));
+        public IActionResult List(int productPage = 1) => View(
+            new ProductsListViewModel { Products = repository.Products.OrderBy(p => p.ProductId).Skip((productPage - 1) * PageSize).Take(PageSize),
+            PagingInfo = new PagingInfo { CurrentPage = productPage, ItemsPerPage = PageSize, TotalItems = repository.Products.Count() }
+            });
     }
 }

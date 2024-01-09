@@ -21,6 +21,10 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.MapControllerRoute(
+    name: "pagination",
+    pattern: "Products/Page{productPage}",
+    defaults: new { controller = "Product", action = "List"});
+app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Product}/{action=List}/{id?}");
 
