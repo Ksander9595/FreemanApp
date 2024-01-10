@@ -13,9 +13,14 @@ namespace FreemanMVC.Controllers
             repository = repo;
         }
 
-        public IActionResult List(int productPage = 1) => View(
-            new ProductsListViewModel { Products = repository.Products.OrderBy(p => p.ProductId).Skip((productPage - 1) * PageSize).Take(PageSize),
-            PagingInfo = new PagingInfo { CurrentPage = productPage, ItemsPerPage = PageSize, TotalItems = repository.Products.Count() }
+        public IActionResult List(string category, int productPage = 1) => View(
+            new ProductsListViewModel { Products = repository.Products
+                .Where(p=>category == null || p.Category == category)
+                .OrderBy(p => p.ProductId)
+                .Skip((productPage - 1) * PageSize)
+                .Take(PageSize),
+            PagingInfo = new PagingInfo { CurrentPage = productPage, ItemsPerPage = PageSize, TotalItems = repository.Products.Count()},
+            CurrentCategory = category
             });
     }
 }
