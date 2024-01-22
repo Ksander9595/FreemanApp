@@ -8,8 +8,8 @@ namespace FreemanMVC.Models
         {
             lineCollection.AddRange(Lines);
         }
-            
-        private readonly List<CartLine> lineCollection = new List<CartLine>();
+
+        public readonly List<CartLine> lineCollection = new List<CartLine>();
 
         public virtual void AddItem(Product product, int quantity)
         {
@@ -45,7 +45,7 @@ namespace FreemanMVC.Models
     public class CartLine
     {
         public int CartLineId { get; set;}
-        public Product Product { get; set; }
+        public Product? Product { get; set; }
         public int Quantity { get; set; }
     }
 }
