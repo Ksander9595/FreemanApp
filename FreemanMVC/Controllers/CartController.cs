@@ -5,6 +5,7 @@ using Microsoft.Identity.Client;
 using Microsoft.AspNetCore.Http;
 using FreemanMVC.Infrastructure;
 using FreemanMVC.Models.ViewModels;
+using System.Collections.Generic;
 
 
 namespace FreemanMVC.Controllers
@@ -15,7 +16,7 @@ namespace FreemanMVC.Controllers
 
         public CartController(IProductRepository repo)
         {
-            repository = repo;
+            repository = repo;                       
         }
         public ViewResult Index(string returnUrl)
         {
@@ -45,7 +46,9 @@ namespace FreemanMVC.Controllers
         }
         private Cart GetCart()
         {
-            Cart cart = HttpContext.Session.GetJson<Cart>("Cart") ?? new Cart(); //если есть Корзина, возвращаем сеанс с Корзиной, инче создаем Корзину
+
+            Cart cart = HttpContext.Session.GetJson<Cart>("Cart") ?? new Cart(Enumerable.Empty<CartLine>());    
+            
             return cart;
         }
         private void SaveCart(Cart cart)

@@ -16,11 +16,14 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlSer
 builder.Services.AddTransient<IProductRepository, EFProductRepository>();
 var app = builder.Build();
 
+app.UseSession();
+
 app.UseDeveloperExceptionPage();
 
 app.UseHttpsRedirection();
 
 app.UseStaticFiles();
+
 app.MapControllerRoute(
     name: null,
     pattern: "{category}/Page{productPage:int}",

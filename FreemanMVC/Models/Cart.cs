@@ -4,14 +4,19 @@ namespace FreemanMVC.Models
 {
     public class Cart
     {
-        private List<CartLine> lineCollection = new List<CartLine>();
+        public Cart(IEnumerable<CartLine> Lines)
+        {
+            lineCollection.AddRange(Lines);
+        }
+            
+        private readonly List<CartLine> lineCollection = new List<CartLine>();
 
         public virtual void AddItem(Product product, int quantity)
         {
             CartLine? line = lineCollection
                 .Where(p => p.Product.ProductId == product.ProductId)
                 .FirstOrDefault();
-
+            
             if(line == null)
             {
                 lineCollection.Add(new CartLine
@@ -33,7 +38,7 @@ namespace FreemanMVC.Models
 
         public virtual void Clear()=>lineCollection.Clear();
 
-        public virtual IEnumerable<CartLine> Lines => lineCollection;
+        public IEnumerable<CartLine> Lines => lineCollection;
 
     }
 
