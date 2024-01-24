@@ -8,6 +8,7 @@ namespace FreemanMVC.Models
         
             public DbSet<Product> Products { get; set; }
             public DbSet<Order> Orders { get; set; }
-        
+            public DbSet<CartLine> CartLines { get; set; }
+
     }
 }

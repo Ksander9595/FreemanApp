@@ -17,10 +17,11 @@ namespace FreemanMVC.Models
 
         public void SaveOrder(Order order)
         {
-            context.AttachRange(order.Lines.Select(l => l.Product));
-            if(order.OrderId == 0)
+            //var products = context.Products.ToArray();context.AttachRange(order.Lines.Select(l => l.Product));
+            //var products1 = order.Lines.Select(l => l.Product).ToArray();
+            if (order.OrderId == 0)
             {
-                context.Orders.Update(order);
+                context.Orders.Add(order);
             }
             context.SaveChanges();
         }

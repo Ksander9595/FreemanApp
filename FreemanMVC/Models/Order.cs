@@ -11,11 +11,8 @@ namespace FreemanMVC.Models
 
         [BindNever]
         public int OrderId { get; set; }
-        [ValidateNever]
-        public ICollection<CartLine> Lines { get; set; }
-
-        //[BindNever]
-        //public bool Shipped { get; set; }
+        [BindNever]
+        public ICollection<CartLine>? Lines { get; set; }
 
         [Required(ErrorMessage = "Please enter a name")]
         public string? Name { get; set; }
