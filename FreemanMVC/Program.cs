@@ -16,6 +16,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlSer
 builder.Services.AddTransient<IProductRepository, EFProductRepository>();
 builder.Services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddTransient<IOrderRepository, EFOrderRepository>();
 var app = builder.Build();
 
 app.UseSession();
